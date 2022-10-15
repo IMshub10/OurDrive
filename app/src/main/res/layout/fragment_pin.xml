@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.screens.pin.fragments.PinFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/TextHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="32dp"
+            android:gravity="center"
+            android:text="@string/welcome"
+            app:layout_constraintBottom_toTopOf="@id/frag_pin_ourImage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/frag_pin_ourImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="32dp"
+            app:layout_constraintBottom_toTopOf="@id/frag_pin_indicatorDots"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/ic_cat_tree_svg" />
+
+        <com.andrognito.pinlockview.IndicatorDots
+            android:id="@+id/frag_pin_indicatorDots"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="32dp"
+            android:gravity="center"
+            app:layout_constraintBottom_toTopOf="@id/frag_pin_useLock"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.andrognito.pinlockview.PinLockView
+            android:id="@+id/frag_pin_useLock"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="32dp"
+            app:keypadButtonSize="72dp"
+            app:keypadDeleteButtonSize="32dp"
+            app:keypadHorizontalSpacing="36dp"
+            app:keypadTextColor="?android:textColor"
+            app:keypadTextSize="24sp"
+            app:keypadShowDeleteButton="true"
+            app:keypadDeleteButtonDrawable="@drawable/ic_back_delete"
+            app:keypadVerticalSpacing="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:pinLength="4" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.core.widget.NestedScrollView>

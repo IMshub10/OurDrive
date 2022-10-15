@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Our Drive</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="welcome">Welcome</string>
+    <string name="loading">Loading...</string>
+    <string name="create_folder">Create Folder</string>
+    <string name="add_folder">Add Folder</string>
+    <string name="folder_name">Folder Name</string>
+</resources>

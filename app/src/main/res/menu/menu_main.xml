@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/add_folder"
+        android:checkable="false"
+        android:enabled="false"
+        app:showAsAction="always"
+        android:icon="@drawable/id_add_folder"
+        android:title="@string/create_folder" />
+</menu>

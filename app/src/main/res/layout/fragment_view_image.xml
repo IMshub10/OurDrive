@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="model"
+            type="com.summer.ourdrive.ui.models.Image" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/no_image"
+            app:setUpImage="@{model}"
+            tools:context=".ui.screens.main.fragments.ViewImageFragment" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_itemImage_cloudUpload"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="top|end"
+            android:layout_margin="2dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_cloud_upload"
+            app:setVisibilityOfUpload = "@{model}" />
+    </FrameLayout>
+
+</layout>

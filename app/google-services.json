@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "220897357151",
+    "project_id": "our-drive-fe49c",
+    "storage_bucket": "our-drive-fe49c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:220897357151:android:f9188c18dfa7543f9b1aea",
+        "android_client_info": {
+          "package_name": "com.summer.ourdrive"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "220897357151-19cl995qm20s0emvopsq62e0ghl0m0mt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsalX5cHM8Ndm6a3wbMQ4JsOK4E4genZ4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "220897357151-19cl995qm20s0emvopsq62e0ghl0m0mt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

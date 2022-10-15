@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_pin"
+    app:startDestination="@id/frag_pin">
+    <fragment
+        android:id="@+id/frag_pin"
+        android:name="com.summer.ourdrive.ui.screens.pin.fragments.PinFragment"
+        android:label="Pin Screen"
+        tools:layout="@layout/fragment_pin" />
+
+</navigation>
