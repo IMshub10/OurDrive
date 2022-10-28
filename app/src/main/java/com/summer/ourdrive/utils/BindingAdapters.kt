@@ -60,4 +60,13 @@ object BindingAdapters {
             this.isVisible = image.imageUrl == null
         }
     }
+    @BindingAdapter("setVisibilityOfDownload")
+    @JvmStatic
+    fun AppCompatImageView.setVisibilityOfDownload(image: Image?) {
+        if (image == null) {
+            this.isVisible = false
+        } else {
+            this.isVisible = image.imageUrl != null
+        }
+    }
 }

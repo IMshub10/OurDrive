@@ -3,11 +3,15 @@ package com.summer.ourdrive.ui.screens.main
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.google.firebase.crashlytics.FirebaseCrashlytics
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.summer.ourdrive.database.ImageEntity
 import com.summer.ourdrive.repositories.ApiRepository
 import com.summer.ourdrive.repositories.DatabaseRepository
+import com.summer.ourdrive.utils.FirebaseDatabaseUtils
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -93,5 +97,18 @@ class MainViewModel(
     fun updateImageEntityWithImageUrl(imageId: String, imageUrl: String) =
         databaseRepository.updateImageEntityWithImageUrl(imageId, imageUrl)
 
+    fun fetchLatestImagesFromFolder(folderId: String) {
+        apiRepository.fetchLatestImagesFromFolder(
+            folderId = folderId,
+            valueEventListener = object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    viewModelScope.launch(Dispatchers.Default) {
+                        FirebaseDatabaseUtils.createImageEntities(folderId, snapshot)
+                            .forEach { imageEntity -> databaseRepository.ignoreInsert(imageEntity) }
+                    }
+                }
 
+                override fun onCancelled(error: DatabaseError) {}
+            })
+    }
 }

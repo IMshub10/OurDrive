@@ -5,7 +5,9 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import com.summer.ourdrive.database.ImageEntity
 import com.summer.ourdrive.ui.models.Folder
+import com.summer.ourdrive.ui.models.Image
 
 
 object FirebaseDatabaseUtils {
@@ -34,6 +36,23 @@ object FirebaseDatabaseUtils {
             it.createdAt
         }
         return sortedList
+    }
+
+    fun createImageEntities(folderId: String, snapshot: DataSnapshot): List<ImageEntity> {
+        if (snapshot.value == null) return listOf()
+        val maps = snapshot.value as HashMap<*, *>
+        val imageList = mutableListOf<ImageEntity>()
+        maps.forEach {
+            val valueMap = it.value as Map<*, *>
+            imageList.add(
+                ImageEntity(
+                    it.key.toString(),
+                    folderId,
+                    valueMap["image_url"].toString()
+                )
+            )
+        }
+        return imageList
     }
 }
 

@@ -38,7 +38,13 @@ class ApiRepository(private val apiService: ApiService) {
         imageId: String,
         map: HashMap<String, Any>
     ): Task<Void> {
-        return FirebaseDatabaseUtils.getFolderReference().child(folderId).child("Images").child(imageId)
+        return FirebaseDatabaseUtils.getFolderReference().child(folderId).child("Images")
+            .child(imageId)
             .setValue(map)
+    }
+
+    fun fetchLatestImagesFromFolder(folderId: String, valueEventListener: ValueEventListener) {
+        FirebaseDatabaseUtils.getFolderReference().child(folderId).child("Images")
+            .addValueEventListener(valueEventListener)
     }
 }

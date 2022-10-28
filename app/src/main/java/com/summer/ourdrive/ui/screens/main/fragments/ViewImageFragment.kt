@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import com.summer.ourdrive.databinding.FragmentViewImageBinding
 import com.summer.ourdrive.ui.models.Image
 import com.summer.ourdrive.ui.screens.main.MainViewModel
+import com.summer.ourdrive.utils.DownloadUtils
 import com.summer.ourdrive.utils.FirebaseStorageUtils
 import com.summer.ourdrive.utils.Utils
 import com.summer.ourdrive.viewmodelFactory.AppViewModelFactory
@@ -50,32 +51,45 @@ class ViewImageFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.ivItemImageCloudUpload.setOnClickListener {
-            lifecycleScope.launch(Dispatchers.Default) {
-                val imageEnt = viewModel.getImageByImageId(imageId)
-                Utils.getUriFromInternalStorage(requireActivity(), imageEnt.folderId, imageEnt.key)
-                    ?.let {
-                        withContext(Dispatchers.Main) {
-                            FirebaseStorageUtils.getImageStorageReference(
-                                imageEnt.folderId,
-                                imageEnt.key
-                            ).putFile(it).addOnSuccessListener {
+        binding.run {
+            ivItemImageCloudUpload.setOnClickListener {
+                lifecycleScope.launch(Dispatchers.Default) {
+                    val imageEnt = viewModel.getImageByImageId(imageId)
+                    Utils.getUriFromInternalStorage(
+                        requireActivity(),
+                        imageEnt.folderId,
+                        imageEnt.key
+                    )
+                        ?.let {
+                            withContext(Dispatchers.Main) {
                                 FirebaseStorageUtils.getImageStorageReference(
                                     imageEnt.folderId,
                                     imageEnt.key
-                                ).downloadUrl.addOnSuccessListener { uri ->
-                                    lifecycleScope.launch(Dispatchers.Default) {
-                                        viewModel.updateImageEntityWithImageUrl(
-                                            imageEnt.key,
-                                            uri.toString()
-                                        )
+                                ).putFile(it).addOnSuccessListener {
+                                    FirebaseStorageUtils.getImageStorageReference(
+                                        imageEnt.folderId,
+                                        imageEnt.key
+                                    ).downloadUrl.addOnSuccessListener { uri ->
+                                        lifecycleScope.launch(Dispatchers.Default) {
+                                            viewModel.updateImageEntityWithImageUrl(
+                                                imageEnt.key,
+                                                uri.toString()
+                                            )
+                                        }
                                     }
                                 }
                             }
                         }
-                    }
+                }
             }
-
+            ivItemImageCloudDownload.setOnClickListener {
+                lifecycleScope.launch(Dispatchers.Default) {
+                    val imageEnt = viewModel.getImageByImageId(imageId)
+                    imageEnt.imageUrl?.let {
+                        DownloadUtils.downloadImage(requireContext(), it,imageEnt.folderId,imageId)
+                    }
+                }
+            }
         }
         viewModel.getImageByImageIdLive(imageId).observe(viewLifecycleOwner) { imageEnt ->
             binding.run {

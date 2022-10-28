@@ -46,6 +46,7 @@ class AddImagesFragment : Fragment() {
         initViewModel()
         arguments?.getString("folderId")?.let {
             folderId = it
+            lifecycleScope.launch(Dispatchers.IO) { viewModel.fetchLatestImagesFromFolder(it) }
         }
     }
 

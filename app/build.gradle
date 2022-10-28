@@ -88,4 +88,7 @@ dependencies {
     // Image Compression
     implementation 'id.zelory:compressor:3.0.1'
 
+    //Download File
+    implementation 'com.mindorks.android:prdownloader:0.6.0'
+
 }
